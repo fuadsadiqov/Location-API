@@ -27,4 +27,6 @@ export interface LocationInterface{
     utc_offset?: string
     version: string
     flagUrl?: string
+    error?: string
+    reason?: string
 }

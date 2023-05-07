@@ -1,40 +1,44 @@
+<div *ngIf="currentLoc?.error && displayError" class="errors">
+  <span>{{currentLoc?.reason}}</span>
+</div>
 <div class="container">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-    <input placeholder="Type IP" type="text" [value]="currentIp" formControlName="formIp">
-    <button type="submit">Check IP</button>
+    <input placeholder="Type IP address" [class.touched]="!ipValue.value" type="text" #ipValue [value]="currentIp" formControlName="formIp">
+    <button [disabled]="!ipValue.value" type="submit">Check IP</button>    
   </form>
-  <div class="item" *ngIf="currentLoc">
+  <div class="requiredError" *ngIf="!ipValue.value">
+    <div>
+      IP is required.
+    </div>
+  </div>
+  <div class="item" *ngIf="currentLoc && !currentLoc.error">
       <div class="item-top">
         <img [src]="currentLoc.flagUrl?.toLowerCase()" width="40" alt="Flag img"country_name>
         <div>IP location: {{currentLoc.country_name ? currentLoc.country_name : "NULL"}}</div>
       </div>
     <div class="item-bottom">
-        <!-- <div><small><b>asn</b></small><br>{{currentLoc.asn ? currentLoc.asn : "NULL"}} <br></div> -->
-        <!-- <div><small><b>continent_code</b></small><br>{{currentLoc.continent_code ? currentLoc.continent_code : "NULL"}} <br></div> -->
-        <div><small><b>CITY, STATE</b></small><br>{{currentLoc.city ? currentLoc.city : "NULL"}} <br></div>
-        <div><small><b>COUNTRY CODE</b></small><br>{{currentLoc.country ? currentLoc.country : "NULL"}} <br></div>
-        <div><small><b>COUNTRY AREA</b></small><br>{{currentLoc.country_area ? currentLoc.country_area : "NULL"}} <br></div>
-        <div><small><b>CALLING CODE</b></small><br>{{currentLoc.country_calling_code ? currentLoc.country_calling_code : "NULL"}} <br></div>
-        <div><small><b>CITY</b></small><br>{{currentLoc.country_capital ? currentLoc.country_capital : "NULL"}} <br></div>
-        <!-- <div><small><b>country_code</b></small><br>{{currentLoc.country_code ? currentLoc.country_code : "NULL"}} <br></div> -->
-        <div><small><b>country_code_iso</b></small><br>{{currentLoc.country_code_iso3 ? currentLoc.country_code_iso3 : "NULL"}} <br></div>
-        <div><small><b>country_population</b></small><br>{{currentLoc.country_population ? currentLoc.country_population : "NULL"}} <br></div>
-        <div><small><b>country_tld</b></small><br>{{currentLoc.country_tld ? currentLoc.country_tld : "NULL"}} <br></div>
-        <div><small><b>currency</b></small><br>{{currentLoc.currency ? currentLoc.currency : "NULL"}} <br></div>
-        <div><small><b>currency_name</b></small><br>{{currentLoc.currency_name ? currentLoc.currency_name : "NULL"}} <br></div>
-        <!-- <div><small><b>in_eu</b></small><br>{{currentLoc.in_eu ? currentLoc.in_eu : "NULL"}} <br></div> -->
-        <div><small><b>ip</b></small><br>{{currentLoc.ip ? currentLoc.ip : "NULL"}} <br></div>
-        <div><small><b>languages</b></small><br>{{currentLoc.languages ? currentLoc.languages : "NULL"}} <br></div>
-        <div><small><b>latitude</b></small><br>{{currentLoc.latitude ? currentLoc.latitude : "NULL"}} <br></div>
-        <div><small><b>longitude</b></small><br>{{currentLoc.longitude ? currentLoc.longitude : "NULL"}} <br></div>
-        <div><small><b>network</b></small><br>{{currentLoc.network ? currentLoc.network : "NULL"}} <br></div>
-        <div><small><b>org</b></small><br>{{currentLoc.org ? currentLoc.org : "NULL"}} <br></div>
-        <div><small><b>postal</b></small><br>{{currentLoc.postal ? currentLoc.postal : "NULL"}} <br></div>
-        <div><small><b>region</b></small><br>{{currentLoc.region ? currentLoc.region : "NULL"}} <br></div>
-        <div><small><b>region_code</b></small><br>{{currentLoc.region_code ? currentLoc.region_code : "NULL"}} <br></div>
-        <div><small><b>timezone</b></small><br>{{currentLoc.timezone ? currentLoc.timezone : "NULL"}} <br></div>
-        <div><small><b>utc_offset</b></small><br>{{currentLoc.utc_offset ? currentLoc.utc_offset : "NULL"}} <br></div>
-        <div><small><b>version</b></small><br>{{currentLoc.version ? currentLoc.version : "NULL"}} <br></div>
+        <div><small><b>CITY, STATE</b></small><br>{{currentLoc.city ? currentLoc.city : "-"}} <br></div>
+        <div><small><b>COUNTRY CODE</b></small><br>{{currentLoc.country ? currentLoc.country : "-"}} <br></div>
+        <div><small><b>COUNTRY AREA</b></small><br>{{currentLoc.country_area ? currentLoc.country_area : "-"}} <br></div>
+        <div><small><b>CALLING CODE</b></small><br>{{currentLoc.country_calling_code ? currentLoc.country_calling_code : "-"}} <br></div>
+        <div><small><b>CITY</b></small><br>{{currentLoc.country_capital ? currentLoc.country_capital : "-"}} <br></div>
+        <div><small><b>country_code_iso</b></small><br>{{currentLoc.country_code_iso3 ? currentLoc.country_code_iso3 : "-"}} <br></div>
+        <div><small><b>country_population</b></small><br>{{currentLoc.country_population ? currentLoc.country_population : "-"}} <br></div>
+        <div><small><b>country_tld</b></small><br>{{currentLoc.country_tld ? currentLoc.country_tld : "-"}} <br></div>
+        <div><small><b>currency</b></small><br>{{currentLoc.currency ? currentLoc.currency : "-"}} <br></div>
+        <div><small><b>currency_name</b></small><br>{{currentLoc.currency_name ? currentLoc.currency_name : "-"}} <br></div>
+        <div><small><b>ip</b></small><br>{{currentLoc.ip ? currentLoc.ip : "-"}} <br></div>
+        <div><small><b>languages</b></small><br>{{currentLoc.languages ? currentLoc.languages : "-"}} <br></div>
+        <div><small><b>latitude</b></small><br>{{currentLoc.latitude ? currentLoc.latitude : "-"}} <br></div>
+        <div><small><b>longitude</b></small><br>{{currentLoc.longitude ? currentLoc.longitude : "-"}} <br></div>
+        <div><small><b>network</b></small><br>{{currentLoc.network ? currentLoc.network : "-"}} <br></div>
+        <div><small><b>org</b></small><br>{{currentLoc.org ? currentLoc.org : "-"}} <br></div>
+        <div><small><b>postal</b></small><br>{{currentLoc.postal ? currentLoc.postal : "-"}} <br></div>
+        <div><small><b>region</b></small><br>{{currentLoc.region ? currentLoc.region : "-"}} <br></div>
+        <div><small><b>region_code</b></small><br>{{currentLoc.region_code ? currentLoc.region_code : "-"}} <br></div>
+        <div><small><b>timezone</b></small><br>{{currentLoc.timezone ? currentLoc.timezone : "-"}} <br></div>
+        <div><small><b>utc_offset</b></small><br>{{currentLoc.utc_offset ? currentLoc.utc_offset : "-"}} <br></div>
+        <div><small><b>version</b></small><br>{{currentLoc.version ? currentLoc.version : "-"}} <br></div>
       </div>
   </div>
 </div>
