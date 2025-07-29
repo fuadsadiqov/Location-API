@@ -42,7 +42,7 @@ export interface LocationInterface {
 To run it locally:
 
 ```bash
-git clone https://github.com/your-username/ip-location-app.git
+git clone https://github.com/fuadsadiqov/Location-API.git
 cd ip-location-app
 npm install
 ng serve
